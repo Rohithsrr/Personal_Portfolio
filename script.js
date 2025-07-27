@@ -96,6 +96,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+    // --- Auto-Hide Navigation on Scroll ---
+    const nav = document.querySelector('nav');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        // Do nothing if the mobile navigation is open
+        if (document.body.classList.contains('nav-open')) {
+            return;
+        }
+
+        if (lastScrollY < window.scrollY && window.scrollY > nav.offsetHeight) {
+            // Scrolling Down: hide nav
+            nav.classList.add('nav-hidden');
+        } else {
+            // Scrolling Up: show nav
+            nav.classList.remove('nav-hidden');
+        }
+
+        // Update last scroll position
+        lastScrollY = window.scrollY;
+    });
+
+
     // --- Back to Top Button ---
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {
